@@ -33,3 +33,4 @@ include(":composeApp")
 //Core modules
 include(":core:data")
 include(":core:domain")
+include(":core:presentation:designsystem")
