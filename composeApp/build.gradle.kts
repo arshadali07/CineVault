@@ -36,6 +36,10 @@ kotlin {
             implementation(projects.core.data)
             implementation(projects.core.presentation.designsystem)
 
+            implementation(projects.feature.movies.data)
+            implementation(projects.feature.movies.domain)
+            implementation(projects.feature.movies.presentation)
+
             //Other dependencies
             implementation(compose.runtime)
             implementation(compose.foundation)

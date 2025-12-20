@@ -1,10 +1,9 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.composeCompiler)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -24,14 +23,14 @@ kotlin {
 
         }
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+            //Projects
+            implementation(projects.core.data)
+            implementation(projects.core.domain)
+            implementation(projects.feature.movies.domain)
+
+            //Other dependencies
+            implementation(libs.kotlin.stdlib)
+            implementation(libs.bundles.ktor.common)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -43,7 +42,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.project.core.presentation.designsystem"
+    namespace = "com.project.feature.movies.data"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -64,12 +63,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-}
-
-compose.resources {
-    publicResClass = true
-}
-
-dependencies {
-    debugImplementation(compose.uiTooling)
 }

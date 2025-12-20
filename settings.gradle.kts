@@ -34,3 +34,8 @@ include(":composeApp")
 include(":core:data")
 include(":core:domain")
 include(":core:presentation:designsystem")
+
+//Feature modules
+include(":feature:movies:data")
+include(":feature:movies:domain")
+include(":feature:movies:presentation")
