@@ -2,6 +2,8 @@ package com.project.feature.movies.presentation.movies
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import androidx.paging.map
 import com.project.core.domain.util.onFailure
 import com.project.core.domain.util.onSuccess
 import com.project.feature.movies.data.movies.RemoteMoviesRepository
@@ -12,6 +14,7 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
@@ -33,6 +36,11 @@ class MoviesViewModel(
             started = SharingStarted.WhileSubscribed(5_000L),
             initialValue = MoviesUiState()
         )
+
+    val paginateMovies = moviesRepository
+        .getPaginatedMovies()
+        .map { data -> data.map { it.toUi() } }
+        .cachedIn(viewModelScope)
 
     fun onAction(action: MoviesAction) {
         when (action) {

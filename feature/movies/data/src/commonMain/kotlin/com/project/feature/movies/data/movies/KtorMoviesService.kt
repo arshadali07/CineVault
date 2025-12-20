@@ -24,4 +24,11 @@ class KtorMoviesService(
             route = "/discover/movie"
         ).map { it.toDomain() }
     }
+
+    override suspend fun getPaginatedMovies(page: Int): Result<Movies, DataError.Remote> {
+        return httpClient.get<MoviesDto>(
+            route = "/discover/movie",
+            queryParams = mapOf("page" to page)
+        ).map { it.toDomain() }
+    }
 }

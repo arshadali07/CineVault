@@ -29,6 +29,7 @@ kotlin {
             //Other dependencies
             implementation(libs.kotlin.stdlib)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.paging.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

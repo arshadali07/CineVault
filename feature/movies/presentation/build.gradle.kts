@@ -34,6 +34,7 @@ kotlin {
             //Coil Image Loading
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
+            implementation(libs.paging.compose)
 
             implementation(compose.runtime)
             implementation(compose.foundation)

@@ -23,6 +23,10 @@ ktor = "3.3.3"
 coilCompose = "3.3.0"
 #endregion Coil Compose
 
+#region Paging compose
+pagingCompose = "3.4.0-beta01"
+#endregion Paging compose
+
 kermit = "2.0.6"
 
 [libraries]
@@ -59,6 +63,10 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coilCompose" }
 #endregion Coil Image Loading
+
+#region Paging compose
+paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
+#endregion Paging compose
 
 #region Logging
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }

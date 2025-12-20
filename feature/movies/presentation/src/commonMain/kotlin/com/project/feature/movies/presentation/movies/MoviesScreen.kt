@@ -1,17 +1,12 @@
 package com.project.feature.movies.presentation.movies
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.items
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -20,16 +15,25 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil3.compose.AsyncImage
+import androidx.paging.LoadState
+import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import coil3.compose.SubcomposeAsyncImage
+import com.project.core.presentation.designsystem.components.loaders.CircularFullScreenLoader
+import com.project.core.presentation.designsystem.components.loaders.ShimmerFullScreenLoader
+import com.project.core.presentation.designsystem.components.paging.ErrorMessageComponent
+import com.project.core.presentation.designsystem.components.paging.PaginationLoadErrorComponent
+import com.project.core.presentation.designsystem.components.paging.PagingLoaderComponent
 import com.project.core.presentation.designsystem.theme.CineVaultTheme
+import com.project.feature.movies.presentation.movies.models.MoviesResultUi
+import kotlinx.coroutines.flow.emptyFlow
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -37,9 +41,11 @@ fun MoviesScreen(
     viewModel: MoviesViewModel = viewModel { MoviesViewModel() }
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val pagingData = viewModel.paginateMovies.collectAsLazyPagingItems()
     MoviesContent(
         modifier = Modifier,
         uiState = uiState,
+        pagingData = pagingData,
         onAction = viewModel::onAction
     )
 }
@@ -49,6 +55,7 @@ fun MoviesScreen(
 private fun MoviesContent(
     modifier: Modifier = Modifier,
     uiState: MoviesUiState,
+    pagingData: LazyPagingItems<MoviesResultUi>,
     onAction: (MoviesAction) -> Unit
 ) {
     Scaffold(
@@ -68,50 +75,61 @@ private fun MoviesContent(
             )
         }
     ) { paddingValues ->
-        if (uiState.isApiLoading) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues)
-            ) {
-                CircularProgressIndicator(
-                    color = MaterialTheme.colorScheme.primary
+        when (val state = pagingData.loadState.refresh) {
+            is LoadState.Error -> ErrorMessageComponent(errorMessage = state.error.message)
+            is LoadState.Loading -> CircularFullScreenLoader()
+            is LoadState.NotLoading -> {
+                val count = pagingData.itemCount
+                if (count > 0) {
+                    MoviesContentList(
+                        modifier = Modifier.padding(paddingValues),
+                        pagingData = pagingData
+                    )
+                } else {
+                    ErrorMessageComponent(
+                        errorMessage = "Unable to fetch movies please try again later"
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MoviesContentList(
+    modifier: Modifier = Modifier,
+    pagingData: LazyPagingItems<MoviesResultUi>
+) {
+    val count = pagingData.itemCount
+    LazyVerticalStaggeredGrid(
+        modifier = modifier,
+        columns = StaggeredGridCells.Adaptive(minSize = 120.dp),
+        verticalItemSpacing = 16.dp,
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(16.dp)
+    ) {
+        items(count = count) { index ->
+            pagingData[index]?.let { movie ->
+                SubcomposeAsyncImage(
+                    model = movie.posterPath,
+                    contentDescription = "Poster Image",
+                    contentScale = ContentScale.FillBounds,
+                    loading = { ShimmerFullScreenLoader() },
+                    error = { ErrorMessageComponent(errorMessage = it.result.throwable.message) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(0.7f)
                 )
             }
-        } else {
-            val movies = uiState.movies?.results
-            if (!movies.isNullOrEmpty()) {
-                LazyVerticalStaggeredGrid(
-                    modifier = Modifier.padding(paddingValues),
-                    columns = StaggeredGridCells.Adaptive(minSize = 120.dp),
-                    verticalItemSpacing = 16.dp,
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(16.dp)
-                ) {
-                    items(items = movies) { movie ->
-                        AsyncImage(
-                            model = movie.posterPath,
-                            contentDescription = "Poster Image",
-                            contentScale = ContentScale.FillBounds,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .aspectRatio(0.7f)
-                        )
-                    }
-                }
-            } else {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                ) {
-                    Text(
-                        text = "Unable to fetch movies please try again later",
-                        style = MaterialTheme.typography.headlineLarge,
-                        color = MaterialTheme.colorScheme.primary,
-                        textAlign = TextAlign.Center
+        }
+        item {
+            when (val state = pagingData.loadState.append) {
+                is LoadState.NotLoading -> {}
+                is LoadState.Loading -> PagingLoaderComponent()
+                is LoadState.Error -> {
+                    PaginationLoadErrorComponent(
+                        errorMessage = state.error.message,
+                        onRetry = { pagingData.retry() }
                     )
                 }
             }
@@ -125,6 +143,7 @@ private fun MoviesContentPreview() {
     CineVaultTheme {
         MoviesContent(
             uiState = testUiState,
+            pagingData = emptyFlow<PagingData<MoviesResultUi>>().collectAsLazyPagingItems(),
             onAction = {}
         )
     }

@@ -6,4 +6,5 @@ import com.project.feature.movies.domain.movies.models.Movies
 
 interface MoviesService {
     suspend fun getMovies(): Result<Movies, DataError.Remote>
+    suspend fun getPaginatedMovies(page: Int): Result<Movies, DataError.Remote>
 }

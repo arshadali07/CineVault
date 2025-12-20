@@ -15,7 +15,7 @@ fun Movies.toUi(): MoviesUi {
     )
 }
 
-private fun MoviesResult.toUi(): MoviesResultUi {
+fun MoviesResult.toUi(): MoviesResultUi {
     return MoviesResultUi(
         adult = adult,
         backdropPath = "${Constants.BACKDROP_IMAGE_BASE_URL}$backdropPath",
