@@ -24,7 +24,10 @@ class RemoteMoviesRepository(
 
     override fun getPaginatedMovies(): Flow<PagingData<MoviesResult>> {
         return Pager(
-            config = PagingConfig(pageSize = 20),
+            config = PagingConfig(
+                pageSize = 20,
+                prefetchDistance = 1
+            ),
             initialKey = 1,
             pagingSourceFactory = { MoviesPagingSource(moviesService) }
         ).flow.flowOn(Dispatchers.IO)
