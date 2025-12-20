@@ -25,8 +25,12 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
-            implementation(libs.kotlin.stdlib)
+            //Projects
+            implementation(projects.core.domain)
 
+            //Other Dependencies
+            implementation(libs.kotlin.stdlib)
+            implementation(libs.touchlab.kermit)
             //Ktor Client
             implementation(libs.bundles.ktor.common)
         }

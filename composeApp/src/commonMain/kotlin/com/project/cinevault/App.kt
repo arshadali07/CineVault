@@ -15,11 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
-
 import cinevault.composeapp.generated.resources.Res
 import cinevault.composeapp.generated.resources.compose_multiplatform
-import com.project.cinevault.discover_movies.DiscoverMoviesViewModel
-import kotlinx.coroutines.delay
 
 @Composable
 @Preview
@@ -29,7 +26,7 @@ fun App() {
         var text by remember { mutableStateOf("Loading") }
         LaunchedEffect(true) {
             text = try {
-                DiscoverMoviesViewModel().discoverMovies()
+                Test().getMovies()
             } catch (e: Exception) {
                 e.message ?: "error"
             }
