@@ -14,6 +14,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 fun App() {
     CineVaultTheme {
         Scaffold(
+            containerColor = CineVaultTheme.colors.backgroundPrimary,
             contentWindowInsets = WindowInsets(0)
         ) { innerPadding ->
             NavigationRoot(

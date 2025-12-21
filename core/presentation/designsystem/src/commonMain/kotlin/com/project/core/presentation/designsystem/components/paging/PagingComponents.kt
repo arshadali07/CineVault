@@ -53,8 +53,8 @@ fun PaginationLoadErrorComponent(
     ) {
         Text(
             text = errorMessage ?: "Unable to fetch movies please try again later",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary,
+            style = CineVaultTheme.typography.headlineOne18Medium,
+            color = CineVaultTheme.colors.textPrimary,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
         )
@@ -77,8 +77,8 @@ fun ErrorMessageComponent(
     ) {
         Text(
             text = errorMessage ?: "Unable to fetch movies please try again later",
-            style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.primary,
+            style = CineVaultTheme.typography.headlineOne18Medium,
+            color = CineVaultTheme.colors.textPrimary,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
