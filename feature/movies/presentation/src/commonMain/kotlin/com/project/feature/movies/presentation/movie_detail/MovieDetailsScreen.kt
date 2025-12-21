@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -69,19 +68,19 @@ private fun MovieDetailsContent(
             ) {
                 Text(
                     text = details?.originalTitle ?: "",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary
+                    style = CineVaultTheme.typography.bodyThree16Medium,
+                    color = CineVaultTheme.colors.textPrimary
                 )
             }
             Text(
                 text = "Genres: ${details?.genres?.joinToString { it.name ?: "" }}",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.primary
+                style = CineVaultTheme.typography.bodyThree16Medium,
+                color = CineVaultTheme.colors.textPrimary
             )
             Text(
                 text = details?.overview ?: "",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.primary
+                style = CineVaultTheme.typography.bodyTwo14Regular,
+                color = CineVaultTheme.colors.textSecondary
             )
         }
     }
