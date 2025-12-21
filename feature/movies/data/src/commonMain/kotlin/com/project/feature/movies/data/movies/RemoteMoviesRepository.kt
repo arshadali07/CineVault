@@ -7,6 +7,7 @@ import com.project.core.domain.util.DataError
 import com.project.core.domain.util.Result
 import com.project.feature.movies.domain.movies.MoviesRepository
 import com.project.feature.movies.domain.movies.MoviesService
+import com.project.feature.movies.domain.movies.models.MovieDetails
 import com.project.feature.movies.domain.movies.models.Movies
 import com.project.feature.movies.domain.movies.models.MoviesResult
 import kotlinx.coroutines.Dispatchers
@@ -31,5 +32,9 @@ class RemoteMoviesRepository(
             initialKey = 1,
             pagingSourceFactory = { MoviesPagingSource(moviesService) }
         ).flow.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getMovieDetails(movieId: Int): Result<MovieDetails, DataError.Remote> {
+        return moviesService.getMovieDetails(movieId)
     }
 }

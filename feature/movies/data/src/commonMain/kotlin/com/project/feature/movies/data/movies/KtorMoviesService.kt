@@ -8,8 +8,10 @@ import com.project.core.domain.util.DataError
 import com.project.core.domain.util.Result
 import com.project.core.domain.util.map
 import com.project.feature.movies.data.movies.mappers.toDomain
+import com.project.feature.movies.data.movies.response.MovieDetailsDto
 import com.project.feature.movies.data.movies.response.MoviesDto
 import com.project.feature.movies.domain.movies.MoviesService
+import com.project.feature.movies.domain.movies.models.MovieDetails
 import com.project.feature.movies.domain.movies.models.Movies
 import io.ktor.client.HttpClient
 
@@ -29,6 +31,12 @@ class KtorMoviesService(
         return httpClient.get<MoviesDto>(
             route = "/discover/movie",
             queryParams = mapOf("page" to page)
+        ).map { it.toDomain() }
+    }
+
+    override suspend fun getMovieDetails(movieId: Int): Result<MovieDetails, DataError.Remote> {
+        return httpClient.get<MovieDetailsDto>(
+            route = "/movie/$movieId"
         ).map { it.toDomain() }
     }
 }

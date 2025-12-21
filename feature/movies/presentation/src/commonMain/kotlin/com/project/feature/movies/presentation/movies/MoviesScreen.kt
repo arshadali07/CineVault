@@ -1,23 +1,19 @@
 package com.project.feature.movies.presentation.movies
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -39,7 +35,8 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun MoviesScreen(
-    viewModel: MoviesViewModel = viewModel { MoviesViewModel() }
+    viewModel: MoviesViewModel = viewModel { MoviesViewModel() },
+    onMovieClick: (MoviesResultUi) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val pagingData = viewModel.paginateMovies.collectAsLazyPagingItems()
@@ -47,7 +44,8 @@ fun MoviesScreen(
         modifier = Modifier,
         uiState = uiState,
         pagingData = pagingData,
-        onAction = viewModel::onAction
+        onAction = viewModel::onAction,
+        onMovieClick = onMovieClick
     )
 }
 
@@ -57,40 +55,24 @@ private fun MoviesContent(
     modifier: Modifier = Modifier,
     uiState: MoviesUiState,
     pagingData: LazyPagingItems<MoviesResultUi>,
-    onAction: (MoviesAction) -> Unit
+    onAction: (MoviesAction) -> Unit,
+    onMovieClick: (MoviesResultUi) -> Unit
 ) {
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Transparent
-                ),
-                title = {
-                    Text(
-                        text = "Movies",
-                        style = MaterialTheme.typography.headlineMedium,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                },
-            )
-        }
-    ) { paddingValues ->
-        when (val state = pagingData.loadState.refresh) {
-            is LoadState.Error -> ErrorMessageComponent(errorMessage = state.error.message)
-            is LoadState.Loading -> CircularFullScreenLoader()
-            is LoadState.NotLoading -> {
-                val count = pagingData.itemCount
-                if (count > 0) {
-                    MoviesContentList(
-                        modifier = Modifier.padding(paddingValues),
-                        pagingData = pagingData
-                    )
-                } else {
-                    ErrorMessageComponent(
-                        errorMessage = "Unable to fetch movies please try again later"
-                    )
-                }
+    when (val state = pagingData.loadState.refresh) {
+        is LoadState.Error -> ErrorMessageComponent(errorMessage = state.error.message)
+        is LoadState.Loading -> CircularFullScreenLoader()
+        is LoadState.NotLoading -> {
+            val count = pagingData.itemCount
+            if (count > 0) {
+                MoviesContentList(
+                    modifier = modifier,
+                    pagingData = pagingData,
+                    onMovieClick = onMovieClick
+                )
+            } else {
+                ErrorMessageComponent(
+                    errorMessage = "Unable to fetch movies please try again later"
+                )
             }
         }
     }
@@ -99,7 +81,8 @@ private fun MoviesContent(
 @Composable
 private fun MoviesContentList(
     modifier: Modifier = Modifier,
-    pagingData: LazyPagingItems<MoviesResultUi>
+    pagingData: LazyPagingItems<MoviesResultUi>,
+    onMovieClick: (MoviesResultUi) -> Unit
 ) {
     val count = pagingData.itemCount
     LazyVerticalStaggeredGrid(
@@ -120,6 +103,8 @@ private fun MoviesContentList(
                     modifier = Modifier
                         .fillMaxWidth()
                         .aspectRatio(0.7f)
+                        .clip(shape = RoundedCornerShape(12.dp))
+                        .clickable(onClick = { onMovieClick(movie) })
                 )
             }
         }
@@ -145,7 +130,8 @@ private fun MoviesContentPreview() {
         MoviesContent(
             uiState = testUiState,
             pagingData = emptyFlow<PagingData<MoviesResultUi>>().collectAsLazyPagingItems(),
-            onAction = {}
+            onAction = {},
+            onMovieClick = {}
         )
     }
 }

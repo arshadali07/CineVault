@@ -1,5 +1,6 @@
 package com.project.feature.movies.data.movies.mappers
 
+import com.project.core.data.networking.UrlConstants
 import com.project.feature.movies.data.movies.response.MoviesDto
 import com.project.feature.movies.data.movies.response.MoviesResultDto
 import com.project.feature.movies.domain.movies.models.Movies
@@ -17,14 +18,14 @@ fun MoviesDto.toDomain(): Movies {
 private fun MoviesResultDto.toDomain(): MoviesResult {
     return MoviesResult(
         adult = adult,
-        backdropPath = backdropPath,
+        backdropPath = "${UrlConstants.BACKDROP_IMAGE_BASE_URL}$backdropPath",
         genreIds = genreIds,
         id = id,
         originalLanguage = originalLanguage,
         originalTitle = originalTitle,
         overview = overview,
         popularity = popularity,
-        posterPath = posterPath,
+        posterPath = "${UrlConstants.POSTER_IMAGE_BASE_URL}$posterPath",
         releaseDate = releaseDate,
         title = title,
         video = video,
