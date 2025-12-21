@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
@@ -41,7 +43,9 @@ fun MoviesScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val pagingData = viewModel.paginateMovies.collectAsLazyPagingItems()
     MoviesContent(
-        modifier = Modifier,
+        modifier = Modifier
+            .statusBarsPadding()
+            .navigationBarsPadding(),
         uiState = uiState,
         pagingData = pagingData,
         onAction = viewModel::onAction,
