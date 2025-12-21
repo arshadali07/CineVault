@@ -15,9 +15,18 @@ kotlin = "2.2.21"
 
 #region KotlinX
 kotlinxCoroutines = "1.10.2"
+kotlinxSerializationCore = "1.9.0"
 #endregion KotlinX
 
+#region Navigation3
+nav3Core = "1.0.0"
+lifecycleViewmodelNav3 = "2.10.0"
+material3AdaptiveNav3 = "1.3.0-alpha05"
+#endregion Navigation3
+
+#region Ktor
 ktor = "3.3.3"
+#endregion Ktor
 
 #region Coil Compose
 coilCompose = "3.3.0"
@@ -27,7 +36,9 @@ coilCompose = "3.3.0"
 pagingCompose = "3.4.0-beta01"
 #endregion Paging compose
 
+#region Kermit Logger
 kermit = "2.0.6"
+#endregion Kermit Logger
 
 [libraries]
 #region Kotlin
@@ -38,6 +49,7 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "
 
 #region KotlinX
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
 #endregion KotlinX
 
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -48,6 +60,12 @@ androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "a
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+
+#region Navigatio3
+androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "nav3Core" }
+androidx-material3-adaptive-navigation3 = { group = "androidx.compose.material3.adaptive", name = "adaptive-navigation3", version.ref = "material3AdaptiveNav3" }
+androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "lifecycleViewmodelNav3" }
+#endregion Navigatio3
 
 #region Ktor Client
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }

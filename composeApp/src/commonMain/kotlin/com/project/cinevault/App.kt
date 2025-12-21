@@ -1,14 +1,21 @@
 package com.project.cinevault
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.project.cinevault.navigation.NavigationRoot
 import com.project.core.presentation.designsystem.theme.CineVaultTheme
-import com.project.feature.movies.presentation.movies.MoviesScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 @Preview
 fun App() {
     CineVaultTheme {
-        MoviesScreen()
+        Scaffold { innerPadding ->
+            NavigationRoot(
+                modifier = Modifier.padding(innerPadding)
+            )
+        }
     }
 }
