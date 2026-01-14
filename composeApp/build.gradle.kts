@@ -54,9 +54,9 @@ kotlin {
             implementation(libs.ktor.client.core)
 
             //Navigation3
-            implementation(libs.androidx.navigation3.ui)
-            implementation(libs.androidx.material3.adaptive.navigation3)
-            implementation(libs.androidx.lifecycle.viewmodel.navigation3)
+            implementation(libs.jetbrains.navigation3.ui)
+            implementation(libs.jetbrains.material3.adaptiveNavigation3)
+            implementation(libs.jetbrains.lifecycle.viewmodelNavigation3)
             implementation(libs.kotlinx.serialization.core)
         }
         commonTest.dependencies {
