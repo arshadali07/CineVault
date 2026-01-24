@@ -37,6 +37,12 @@ kotlin {
             implementation(projects.core.data)
             implementation(projects.core.presentation.designsystem)
 
+            //region Home Projects
+            implementation(projects.feature.home.data)
+            implementation(projects.feature.home.domain)
+            implementation(projects.feature.home.presentation)
+            //endregion Home Projects
+
             implementation(projects.feature.movies.data)
             implementation(projects.feature.movies.domain)
             implementation(projects.feature.movies.presentation)
@@ -50,6 +56,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.org.jetbrains.material.icons.extended)
 
             implementation(libs.ktor.client.core)
 
