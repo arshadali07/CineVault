@@ -36,6 +36,10 @@ include(":core:domain")
 include(":core:presentation:designsystem")
 
 //Feature modules
+include(":feature:home:data")
+include(":feature:home:domain")
+include(":feature:home:presentation")
+
 include(":feature:movies:data")
 include(":feature:movies:domain")
 include(":feature:movies:presentation")
