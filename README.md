@@ -12,8 +12,8 @@ Kotlin, Jetpack Compose, Coroutines, Flow, Ktor, Navigation3
 <img alt="Explore Details" src="https://github.com/user-attachments/assets/d6aa5112-29e2-42f0-8fcc-180d9df42928" width="300"/>
 
 # iOS App Screen shots
-<img alt="Home Page" src="https://github.com/user-attachments/assets/2f4b8d42-f455-4dea-b2a1-f127e3c4c7ce" width="300" height="720"/>
-<img alt="Explore Page" src="https://github.com/user-attachments/assets/18cc4814-dd48-423b-a1fc-c14a20ab8750" width="300" height="720"/>
+<img alt="Home Page" src="https://github.com/user-attachments/assets/18cc4814-dd48-423b-a1fc-c14a20ab8750" width="300" height="720"/>
+<img alt="Explore Page" src="https://github.com/user-attachments/assets/2f4b8d42-f455-4dea-b2a1-f127e3c4c7ce" width="300" height="720"/>
 <img alt="Explore Details" src="https://github.com/user-attachments/assets/7c1006f3-fa45-473d-a0f6-37e884b89a6d" width="300" height="720"/>
 
 
