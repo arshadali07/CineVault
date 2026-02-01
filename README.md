@@ -1,3 +1,12 @@
+# CineVault
+
+Kotlin Multiplatform App built with [TMDB Client](https://www.themoviedb.org/)
+
+
+# Technologies Used
+Kotlin, Jetpack Compose, Coroutines, Flow, Ktor, Navigation3
+
+
 This is a Kotlin Multiplatform project targeting Android, iOS.
 
 * [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
