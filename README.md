@@ -7,9 +7,9 @@ Kotlin Multiplatform App built with [TMDB Client](https://www.themoviedb.org/)
 Kotlin, Jetpack Compose, Coroutines, Flow, Ktor, Navigation3
 
 # App Screen shots
-<img src="https://github.com/user-attachments/assets/34a69ee5-e878-4070-895e-8d354677dd64" width="300">
-<img src="https://github.com/user-attachments/assets/95f1b531-d681-44cb-ac20-4265fd0a0f54" width="300">
-<img src="https://github.com/user-attachments/assets/cab58f45-79f2-4c76-85fe-88a5fc41b178" width="300">
+<img src="https://github.com/user-attachments/assets/d6aa5112-29e2-42f0-8fcc-180d9df42928" width="300"/>
+<img src="https://github.com/user-attachments/assets/24e44a7a-012f-4afc-847a-8dcf41007808" width="300"/>
+<img src="https://github.com/user-attachments/assets/852d6859-6b57-46ad-9da8-39aab404aff7" width="300"/>
 
 
 This is a Kotlin Multiplatform project targeting Android, iOS.
@@ -37,6 +37,7 @@ in your IDE’s toolbar or build it directly from the terminal:
 - on Windows
   ```shell
   .\gradlew.bat :composeApp:assembleDebug
+
   ```
 
 ### Build and Run iOS Application
@@ -47,3 +48,5 @@ in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and r
 ---
 
 Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+
+
