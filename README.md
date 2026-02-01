@@ -6,6 +6,11 @@ Kotlin Multiplatform App built with [TMDB Client](https://www.themoviedb.org/)
 # Technologies Used
 Kotlin, Jetpack Compose, Coroutines, Flow, Ktor, Navigation3
 
+# App Screen shots
+<img src="https://github.com/user-attachments/assets/34a69ee5-e878-4070-895e-8d354677dd64" width="300">
+<img src="https://github.com/user-attachments/assets/95f1b531-d681-44cb-ac20-4265fd0a0f54" width="300">
+<img src="https://github.com/user-attachments/assets/cab58f45-79f2-4c76-85fe-88a5fc41b178" width="300">
+
 
 This is a Kotlin Multiplatform project targeting Android, iOS.
 
