@@ -7,15 +7,14 @@ Kotlin Multiplatform App built with [TMDB Client](https://www.themoviedb.org/)
 Kotlin, Jetpack Compose, Coroutines, Flow, Ktor, Navigation3
 
 # Android App Screen shots
-<img src="https://github.com/user-attachments/assets/852d6859-6b57-46ad-9da8-39aab404aff7" width="300"/>
-<img src="https://github.com/user-attachments/assets/24e44a7a-012f-4afc-847a-8dcf41007808" width="300"/>
-<img src="https://github.com/user-attachments/assets/d6aa5112-29e2-42f0-8fcc-180d9df42928" width="300"/>
+<img alt="Home Page" src="https://github.com/user-attachments/assets/852d6859-6b57-46ad-9da8-39aab404aff7" width="300"/>
+<img alt="Explore Page" src="https://github.com/user-attachments/assets/24e44a7a-012f-4afc-847a-8dcf41007808" width="300"/>
+<img alt="Explore Details" src="https://github.com/user-attachments/assets/d6aa5112-29e2-42f0-8fcc-180d9df42928" width="300"/>
 
 # iOS App Screen shots
-<img alt="Home Page" src="https://github.com/user-attachments/assets/8a5debab-44d4-4495-ba03-2f8a8a4b211a" width="300"/>
-<img alt="Explore Page" src="https://github.com/user-attachments/assets/6c4d30b1-aa3c-4cb5-a4ca-6af69f202813" width="300"/>
-<img alt="Explore Details" src="https://github.com/user-attachments/assets/f3840e24-b7ed-4b9f-8d3f-fc3ac607e53d" width="300"/>
-
+<img alt="Home Page" src="https://github.com/user-attachments/assets/2f4b8d42-f455-4dea-b2a1-f127e3c4c7ce" width="300"/>
+<img alt="Explore Page" src="https://github.com/user-attachments/assets/18cc4814-dd48-423b-a1fc-c14a20ab8750" width="300"/>
+<img alt="Explore Details" src="https://github.com/user-attachments/assets/7c1006f3-fa45-473d-a0f6-37e884b89a6d" width="300"/>
 
 
 This is a Kotlin Multiplatform project targeting Android, iOS.
